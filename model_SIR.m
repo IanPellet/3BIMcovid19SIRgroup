@@ -10,7 +10,7 @@ n = 4;
 N = popAge([18 40 70]);    % population
 
 %gam = [1/7.0 ; 1/10.0 ; 1/14.0];  % recovery rate 1/two weeks = 1/14 
-gam = [1/17.0 ; 1/.23 ; 1/35.0 ; 1/30.0];
+gam = [1/17.0 ; 1/23.0 ; 1/35.0 ; 1/30.0];
 
 R0 = 2.5;       %Avant confinement
 %R0 = 0.5;       %Pendant confinement
