@@ -7,7 +7,7 @@ function sol = model_SIR()
 % Dynamical parameters
 n = 4;
 
-N = popAge([16 30 75]);    % population
+N = popAge([18 40 70]);    % population
 
 %gam = [1/7.0 ; 1/10.0 ; 1/14.0];  % recovery rate 1/two weeks = 1/14 
 gam = [1/17.0 ; 1/.23 ; 1/35.0 ; 1/30.0];
