@@ -49,9 +49,43 @@ soly = [sum(sol.y(1:4,:)) ;
         sum(sol.y(9:12,:));
         sum(sol.y)];
 
-figure(2); clf;
+figure(1); clf;     %Modele
 semilogy(sol.x, soly(1:4,:));
 legend('S','I','R','Total');
+title('Model');
+
+solys = [sol.y(1,:) ;
+        sol.y(2,:) ;
+        sol.y(3,:);
+        sol.y(4,:);
+        sum(sol.y(1:4,:))];
+    
+figure(2); clf;     %Suceptible
+semilogy(sol.x, solys(1:5,:));
+legend('0-18ans','18-40ans','40-70ans','+70ans','Total');
+title('Susceptible');
+
+solyi = [sol.y(5,:) ;
+        sol.y(6,:) ;
+        sol.y(7,:);
+        sol.y(8,:);
+        sum(sol.y(5:8,:))];
+    
+figure(3); clf;     %Infectious
+semilogy(sol.x, solyi(1:5,:));
+legend('0-18ans','18-40ans','40-70ans','+70ans','Total');
+title('Infectious');
+
+solyr = [sol.y(9,:) ;
+        sol.y(10,:) ;
+        sol.y(11,:);
+        sol.y(12,:);
+        sum(sol.y(9:12,:))];
+    
+figure(4); clf;     %Retablis
+semilogy(sol.x, solyr(1:5,:));
+legend('0-18ans','18-40ans','40-70ans','+70ans','Total');
+title('Retablis');
 
 disp(['Percentage of contaminated 100*(I+R)/N at day ' num2str(tspan(2)), ': ', ...
   num2str(100*sum(sol.y(5:12,end)/N))]);
