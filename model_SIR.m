@@ -7,15 +7,23 @@ N = popAge([25 70]);    % population
 %mu = 3.4e-5;    % natural death rate 1/80 years = 1/80/365 per day 
 %Lambda = N*mu;  % birth rate: set to keep N constant (ignoring deaths from covid-19)
 gam = [1/7.0 ; 1/10.0 ; 1/14.0];  % recovery rate 1/two weeks = 1/14 
-R0 = 2.5;
+%R0 = 2.5;
 
-beta = eye(n).*R0.*gam;
-beta([2 3 4 6 7 8]) = [0.3 0.1 0.3 0.2 0.1 0.2];
+%beta = eye(n).*R0.*gam;
+%beta([2 3 4 6 7 8]) = [0.3 0.1 0.3 0.2 0.1 0.2];
+
+% Contact matrix import
+names = {'Age', '0-4y', '5-9y', '10-14y', '15-19y', '20-24y', '25-29y', '30-34y', '35-39y', '40-44y', '45-49y', '50-54y', '55-59y', '60-64y', '65-69y', '70y+'};
+contact = readtable('./contact.txt');
+contact.Properties.VariableNames = names;
+contact = removevars(contact, {'Age'});
+contact.Properties.RowNames = names;
 
 
 % Integration parameters 
-IC = [(N(1)-0.25e3) 0.25e3 0 ; (N(2)-0.33e3) 0.33e3 0 ; (N(3)-0.42e3) 0.42e3 0 ]; % seed a few infected individuals
-tspan = [0 365]; % in days 
+I0 = [0 ; 7 ; 0];
+IC = [(N(1)-I0(1)) I0(1) 0 ; (N(2)-I0(2)) I0(2) 0 ; (N(3)-I0(3)) I0(3) 0 ]; % seed a few infected individuals
+tspan = [46 365]; % in days 
 
 % simulations
 options = odeset('RelTol', 1e-6, 'AbsTol', 1e-6);
