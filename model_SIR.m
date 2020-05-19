@@ -5,35 +5,26 @@ function sol = model_SIR()
 
 % Dynamical parameters
 N = popAge([18 40 70]);    % population
-%gam = [1/17.0 ; 1/23.0 ; 1/35.0 ; 1/30.0]; 
-gam = ones(4,1)*1/10.0; % recovery rate 1/10days
+gam = [1/4.0 ; 1/8.0 ; 1/10.0 ; 1/14.0]; 
 
 %R0 = 2.3;       %Avant confinement
 %R0 = 0.5;       %Pendant confinement
-%R0 = 0.9;       %Apr�s confinement
+%R0 = 0.9;       %Apres confinement
 
-
-Ci = [1 2 1.5 0 ; 2 4 3 1 ; 1.5 3 2.5 1 ; 0 1 1 0.5];        %contact possible avant confinement
-Cc = [0. 1.5 1 0 ; 1.5 2 1 0 ; 1 1 1 0.5 ; 0 0 0.5 0.5];        %contact possible pendant confinement
+Ci = [5.43 1.98 2.14 0.24 ; 1.57 5.17 3.79 0.54 ; 1.27 2.83 5.26 0.92 ; 0.43 1.23 2.81 1.76];        %contact possible avant confinement
+Cc = [0.53 0.29 0.29 0.02 ; 0.23 1.04 1.04 0.16 ; 0.17 0.77 1.13 0.19 ; 0.05 0.37 0.60 0.16];        %contact possible pendant confinement
 Cpc = [0. 1.5 1 0 ; 1.5 3 1.5 0 ; 1 1.5 2 0.5 ; 0 0 0.5 0.5];        %contact possible apres confinement
 
-tc = 20; %début du confinement
+tc = 20; %debut du confinement
 tpc = 80; %fin du confinement
 
-infect = 0.04; %infectiosité = Ro*gam/C 
-% avec C le nombre moyen de contact par jour pré-confinement
-% c = 8
-% R0 = 2.3
-% gam = 1/10
+infect = 0.04; %infectiosite = Ro*gam/C 
 
 
 
 % Integration parameters 
 I0 = [0 ; 0 ; 1 ; 0];
 IC = [(N(1)-I0(1)) I0(1) 0 ; (N(2)-I0(2)) I0(2) 0 ; (N(3)-I0(3)) I0(3) 0  ; (N(4)-I0(4)) I0(4) 0  ];    %infecte au debut
-%IC = [(N(1)-N(1)*0.00001) N(1)*0.00001 0 ; (N(2)-N(2)*0.00001) N(2)*0.00001 0 ; (N(3)-N(3)*0.00001) N(3)*0.00001 0  ; (N(4)-N(4)*0.00001) N(4)*0.00001 0  ];    %infecte au debut
-%IC = [(N(1)-N(1)*0.2) N(1)*0.2 0 ; (N(2)-N(2)*0.15) N(2)*0.15 0 ; (N(3)-N(3)*0.25) N(3)*0.25 0  ; (N(4)-N(4)*0.2) N(4)*0.2 0  ];    %infect� au debut du confinement
-%IC = [(N(1)-N(1)*0.000001) N(1)*0.000001 0 ; (N(2)-N(2)*0.1) N(2)*0.1 0 ; (N(3)-N(3)*0.15) N(3)*0.15 0  ; (N(4)-N(4)*0.1) N(4)*0.1 0  ];    %infect� a la fin du confinement
 
 tspan = [0 365]; % in days 
 
